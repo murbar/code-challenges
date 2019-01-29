@@ -6,8 +6,8 @@ function hourglassSum(arr) {
     const nRows = arr.length;
     const nCols = arr[0].length;
 
-    for (row of Array(nRows - 2).keys()) {
-        for (col of Array(nCols - 2).keys()) {
+    for (const row of Array(nRows - 2).keys()) {
+        for (const col of Array(nCols - 2).keys()) {
             const [r1, r2, r3] = [arr[row], arr[row+1], arr[row+2]];
             const [c1, c2, c3] = [col, col+1, col+2]
             
@@ -22,14 +22,14 @@ function hourglassSum(arr) {
     return Math.max(...sums);
 }
 
-
-const arr = [[1, 1, 1, 0, 0, 0],
+// tests
+const input = [[1, 1, 1, 0, 0, 0],
        [0, 1, 0, 0, 0, 0],
        [1, 1, 1, 0, 0, 0],
        [0, 0, 2, 4, 4, 0],
        [0, 0, 0, 2, 0, 0],
        [0, 0, 1, 2, 4, 0]]
 const expected_output = 19
-const output = hourglassSum(arr)
+const output = hourglassSum(input)
 console.log(output)
 console.log("Passes:", output === expected_output)
