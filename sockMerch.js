@@ -1,6 +1,7 @@
 // https://www.hackerrank.com/challenges/sock-merchant/problem
 
 
+// n is unused in this solution
 function sockMerchant(n, ar) {
     const kinds = [...new Set(ar)];
     return kinds.reduce((pairs, k) => {
@@ -8,9 +9,8 @@ function sockMerchant(n, ar) {
     }, 0);
 }
 
-const arr = [10, 20, 20, 10, 10, 30, 50, 10, 20];
-const desiredOutput = 3;
 
-const result = sockMerchant(1, arr); // only use second param
-console.log(result);
-console.assert(result === desiredOutput);
+// tests
+const input = [10, 20, 20, 10, 10, 30, 50, 10, 20];
+const expectedOutput = 3;
+console.log('Test 1 passes:', sockMerchant(0, input) === expectedOutput);

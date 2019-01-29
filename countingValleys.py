@@ -15,6 +15,6 @@ def countingValleys(n, s):
 s = "UDDDUDUU"
 desired_result = 1
 
-output = countingValleys(s)
+output = countingValleys(0, s)
 print(output)
 print("Passes:", output == desired_result)

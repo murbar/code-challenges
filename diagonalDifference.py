@@ -12,9 +12,7 @@ def diagonalDifference(arr):
     return abs(l_to_r - r_to_l)
 
 
-arr = [[11, 2, 4], [4, 5, 6], [10, 8, -12]]
-desired_result = 15
-
-output = diagonalDifference(arr)
-print(output)
-print("Passes:", output == desired_result)
+# tests
+test_input = [[11, 2, 4], [4, 5, 6], [10, 8, -12]]
+expected_output = 15
+print("Passes:", diagonalDifference(test_input) == expected_output)

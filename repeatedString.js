@@ -14,16 +14,14 @@ function repeatedString(s, n) {
 }
 
 
-const s = "aba";
-const n = 10;
-const desired_result = 7;
+// tests
+const test1s = "aba";
+const test1n = 10;
+const test1expectedOutput = 7;
 
-const s2 = "babbaabbabaababaaabbbbbbbababbbabbbababaabbbbaaaaabbaababaaabaabbabababaabaabbbababaabbabbbababbaabb";
-const n2 = 860622337747;
-const desired_result2 = 395886275361;
+const test2s = "babbaabbabaababaaabbbbbbbababbbabbbababaabbbbaaaaabbaababaaabaabbabababaabaabbbababaabbabbbababbaabb";
+const test2n = 860622337747;
+const test2expectedOutput = 395886275361;
 
-const output = repeatedString(s, n);
-console.log(output, "- success:", output === desired_result);
-
-const output2 = repeatedString(s2, n2);
-console.log(output2, "- success:", output2 === desired_result2);
+console.log("Test 1 passes:", repeatedString(test1s, test1n) === test1expectedOutput);
+console.log("Test 2 passes:", repeatedString(test2s, test2n) === test2expectedOutput);

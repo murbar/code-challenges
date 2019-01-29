@@ -5,7 +5,7 @@ def repeatedString(s, n):
     if len(s) == 1:
         return n
 
-    # very inefficient on large inputs
+    # naive solution, very inefficient on large inputs
     # factor = n // len(s)
     # test_str = s * (factor + 1)
     # test_str = test_str[:n]
@@ -16,20 +16,16 @@ def repeatedString(s, n):
     mod = n % len(s)
     rest = s[:mod].count('a')
     return (count * factor) + rest
-    # or the ugly way
-    # return (list(s).count('a') * (n // len(s))) + s[:(n % len(s))].count('a')
 
 
-s = "aba"
-n = 10
-desired_result = 7
+# tests
+test1_s = "aba"
+test1_n = 10
+test1_expected = 7
 
-s2 = "babbaabbabaababaaabbbbbbbababbbabbbababaabbbbaaaaabbaababaaabaabbabababaabaabbbababaabbabbbababbaabb"
-n2 = 860622337747
-desired_result2 = 395886275361
+test2_s = "babbaabbabaababaaabbbbbbbababbbabbbababaabbbbaaaaabbaababaaabaabbabababaabaabbbababaabbabbbababbaabb"
+test2_n = 860622337747
+test2_expected = 395886275361
 
-output = repeatedString(s, n)
-print(output, "- success:", output == desired_result)
-
-output2 = repeatedString(s2, n2)
-print(output2, "- success:", output2 == desired_result2)
+print("Test 1 passes:", repeatedString(test1_s, test1_n) == test1_expected)
+print("Test 2 passes:", repeatedString(test2_s, test2_n) == test2_expected)

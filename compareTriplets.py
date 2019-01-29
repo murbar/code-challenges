@@ -11,10 +11,8 @@ def compareTriplets(a, b):
     return points
 
 
-a = [5, 6, 7]
-b = [3, 6, 10]
-desired_result = [1, 1]
-
-output = compareTriplets(a, b)
-print(output)
-print("Passes:", output == desired_result)
+# tests
+test_a = [5, 6, 7]
+test_b = [3, 6, 10]
+expected_output = [1, 1]
+print("Passes:", compareTriplets(test_a, test_b) == expected_output)

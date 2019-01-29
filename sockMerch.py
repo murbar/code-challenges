@@ -12,6 +12,7 @@ def sockMerchant(n, ar):
     return pairs
 
 
+# tests
 test_input = '10 20 20 10 10 30 50 10 20'.split(' ')
 expected_output = 3
 print("Passes:", sockMerchant(0, test_input) == expected_output)
