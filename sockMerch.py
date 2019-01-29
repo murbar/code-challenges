@@ -1,16 +1,17 @@
+# // https://www.hackerrank.com/challenges/sock-merchant/problem
 
+
+# n is unused
 def sockMerchant(n, ar):
     kinds = set(ar)
     pairs = 0
-    print(kinds)
-    for k in kinds:
 
-        matches = ar.count(k) // 2
-        print(k, matches)
-        pairs += matches
+    for k in kinds:
+        pairs += ar.count(k) // 2
+
     return pairs
 
 
-socks = '1 1 3 1 2 1 3 3 3 3'.split(' ')
-
-print(sockMerchant(5, socks))
+test_input = '10 20 20 10 10 30 50 10 20'.split(' ')
+expected_output = 3
+print("Passes:", sockMerchant(0, test_input) == expected_output)
