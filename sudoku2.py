@@ -37,11 +37,23 @@ def translate_coords_to_subgrid(value):
     return x, y
 
 
+def rows_are_equal(v1, v2):
+    return v1['row'] == v2['row']
+
+
+def cols_are_equal(v1, v2):
+    return v1['col'] == v2['col']
+
+
+def values_are_equal(v1, v2):
+    return v1['value'] == v2['value']
+
+
 def is_unique_row_and_col(value, values):
     for v in values:
         if v == value:
             continue  # no need to test against self
-        if (v['row'] == value['row'] or v['col'] == value['col']) and v['value'] == value['value']:
+        if (rows_are_equal(v, value) or cols_are_equal(v, value)) and values_are_equal(v, value):
             return False
 
     return True
