@@ -63,7 +63,7 @@ def areUniqueInNinths(values):
 
     for row in subGrid:
         for location in row:
-            # not invalid if it's the only value in the grid
+            # must have two to compare, else valid
             if not len(location) > 1:
                 continue
             for value in location:
@@ -76,13 +76,17 @@ def areUniqueInNinths(values):
     return True
 
 
-def sudoku2(grid):
-
+def extract_values(grid):
     values = []
     for x, row in enumerate(grid):
         for y, value in enumerate(row):
             if value in '0123456789':
                 values.append({'value': value, 'row': x, 'col': y})
+    return values
+
+
+def sudoku2(grid):
+    values = extract_values(grid)
 
     if not areUniqueInNinths(values):
         return False
