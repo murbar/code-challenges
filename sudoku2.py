@@ -64,13 +64,14 @@ def areUniqueInNinths(values):
     for row in subGrid:
         for location in row:
             # not invalid if it's the only value in the grid
-            if len(location) > 1:
-                for value in location:
-                    for v in location:
-                        if v == value:
-                            continue  # no need to test against self
-                        if (v['value'] == value['value']):
-                            return False
+            if not len(location) > 1:
+                continue
+            for value in location:
+                for v in location:
+                    if v == value:
+                        continue  # no need to test against self
+                    if (v['value'] == value['value']):
+                        return False
 
     return True
 
