@@ -53,8 +53,13 @@ gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
 
 # subgrid
 # sort cases in to 9 possible subgrids
-# list of nine empty lists
-#   if row 0-2,
+# (list of nine empty lists?)
+#   if case row 0-2 and col 0-2 -> ninths[0].append(el)
+#   etc, etc
+# for n in ninths
+#   if len(n) > 1
+#       compare els in n, return False is values are equal
+#
 # compare values of each case in subgrid
 
 
