@@ -51,13 +51,19 @@ gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
 #   compare to all cases with same y
 #       return False if value of el match
 
+# subgrid
+# sort cases in to 9 possible subgrids
+# list of nine empty lists
+#   if row 0-2,
+# compare values of each case in subgrid
+
 
 def isUniqueInRow(case, cases):
     for c in cases:
         if c == case:
             continue
         # combine these in future with logical or and ()
-        if c.row == case.row and c.value == case.value:
+        if c['row'] == case['row'] and c['value'] == case['value']:
             print('X FAIL', c, case)
             return False
 
@@ -68,7 +74,7 @@ def isUniqueInCol(case, cases):
     for c in cases:
         if c == case:
             continue
-        if c.col == case.col and c.value == case.value:
+        if c['col'] == case['col'] and c['value'] == case['value']:
             print('Y FAIL', c, case)
             return False
 
