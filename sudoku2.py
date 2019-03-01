@@ -58,24 +58,13 @@ gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
 # compare values of each case in subgrid
 
 
-def isUniqueInRow(case, cases):
-    for c in cases:
-        if c == case:
+def isUniqueInRowAndCol(case, cases):
+    for i in cases:
+        if i == case:
             continue
         # combine these in future with logical or and ()
-        if c['row'] == case['row'] and c['value'] == case['value']:
-            print('X FAIL', c, case)
-            return False
-
-    return True
-
-
-def isUniqueInCol(case, cases):
-    for c in cases:
-        if c == case:
-            continue
-        if c['col'] == case['col'] and c['value'] == case['value']:
-            print('Y FAIL', c, case)
+        if (i['row'] == case['row'] or i['col'] == case['col']) and i['value'] == case['value']:
+            print('INVALID', i, case)
             return False
 
     return True
@@ -86,9 +75,7 @@ def isUniqueInNinth(case, cases):
 
 
 def isValid(case, cases, grid):
-    return isUniqueInRow(case, cases) and \
-        isUniqueInCol(case, cases) and \
-        isUniqueInNinth(case, cases)
+    return isUniqueInRowAndCol(case, cases) and isUniqueInNinth(case, cases)
 
 
 def sudoku2(grid):
@@ -97,7 +84,7 @@ def sudoku2(grid):
     for x, row in enumerate(grid):
         for y, value in enumerate(row):
             if value in '0123456789':
-                cases.append({'row': x, 'col': y, 'value': value})
+                cases.append({'value': value, 'row': x, 'col': y})
 
     print(cases)
     for case in cases:
