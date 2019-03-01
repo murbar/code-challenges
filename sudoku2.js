@@ -44,7 +44,6 @@ function valueObjectsAreEqual(v1, v2) {
 
 function areUniqueInSubGrid(values) {
   const subGrid = [[[], [], []], [[], [], []], [[], [], []]];
-  // let areUnique = true;
 
   values.forEach(v => {
     const [x, y] = translateCoordsToSubGrid(v);
@@ -64,24 +63,28 @@ function areUniqueInSubGrid(values) {
     }
   }
 
-  // subGrid.forEach(row => {
-  //   row.forEach(location => {
-  //     if (!location.length > 1) return;
-  //     location.forEach(value => {
-  //       location.forEach(v => {
-  //         // abort if testing against self
-  //         if (valueObjectsAreEqual(v, value)) return;
-  //         if (v.value === value.value) areUnique = !areUnique;
-  //       });
-  //     });
-  //   });
-  // });
-
-  // return areUnique;
   return true;
 }
 
+function rowsAreEqual(v1, v2) {
+  return v1.row === v2.row;
+}
+
+function colsAreEqual(v1, v2) {
+  return v1.col === v2.col;
+}
+
+function valuesAreEqual(v1, v2) {
+  return v1.value === v2.value;
+}
+
 function isUniqueInRowAndCol(value, values) {
+  for (const v of values) {
+    if (valueObjectsAreEqual(v, value)) continue;
+    if ((rowsAreEqual(v, value) || colsAreEqual(v, value)) && valuesAreEqual(v, value))
+      return false;
+  }
+
   return true;
 }
 
