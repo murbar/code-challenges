@@ -122,10 +122,6 @@ def areUniqueInNinths(values):
     return True
 
 
-def isValid(value, values):
-    return isUniqueInRowAndCol(value, values) and isUniqueInNinth(value, values)
-
-
 def sudoku2(grid):
 
     values = []
@@ -134,11 +130,12 @@ def sudoku2(grid):
             if value in '0123456789':
                 values.append({'value': value, 'row': x, 'col': y})
 
-    # for value in values:
-    #     if not isValid(value, values):
-    #         return False
+    if not areUniqueInNinths(values):
+        retturn False
 
-    areUniqueInNinths(values)
+    for value in values:
+        if not isUniqueInRowAndCol(value, values):
+            return False
 
     return True
 
