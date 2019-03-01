@@ -38,7 +38,46 @@ function translateCoordsToSubGrid(value) {
   return [x, y];
 }
 
+function valueObjectsAreEqual(v1, v2) {
+  return v1.value === v2.value && v1.row === v2.row && v1.col === v2.col;
+}
+
 function areUniqueInSubGrid(values) {
+  const subGrid = [[[], [], []], [[], [], []], [[], [], []]];
+  // let areUnique = true;
+
+  values.forEach(v => {
+    const [x, y] = translateCoordsToSubGrid(v);
+    subGrid[x][y].push(v);
+  });
+
+  // for loops so we can return from outer function
+  for (const row of subGrid) {
+    for (const location of row) {
+      if (!location.length > 1) continue;
+      for (const value of location) {
+        for (const v of location) {
+          if (valueObjectsAreEqual(v, value)) continue;
+          if (v.value === value.value) return false;
+        }
+      }
+    }
+  }
+
+  // subGrid.forEach(row => {
+  //   row.forEach(location => {
+  //     if (!location.length > 1) return;
+  //     location.forEach(value => {
+  //       location.forEach(v => {
+  //         // abort if testing against self
+  //         if (valueObjectsAreEqual(v, value)) return;
+  //         if (v.value === value.value) areUnique = !areUnique;
+  //       });
+  //     });
+  //   });
+  // });
+
+  // return areUnique;
   return true;
 }
 
@@ -70,9 +109,9 @@ function sudoku2(grid) {
 
   if (!areUniqueInSubGrid(values)) return false;
 
-  values.forEach(value => {
+  for (const value of values) {
     if (!isUniqueInRowAndCol(value, values)) return false;
-  });
+  }
 
   return true;
 }
