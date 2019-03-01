@@ -46,11 +46,15 @@ function isUniqueInRowAndCol(value, values) {
   return true;
 }
 
+function valueIsValid(value) {
+  return '123456789'.includes(value);
+}
+
 function extractValues(grid) {
   const values = [];
   grid.forEach((row, x) => {
     row.forEach((value, y) => {
-      if ('123456789'.includes(value))
+      if (valueIsValid(value))
         values.push({
           value: value,
           row: x,
