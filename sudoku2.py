@@ -30,40 +30,6 @@ gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
              ['.', '1', '.', '2', '.', '.', '.', '.', '.'],
              ['.', '2', '.', '.', '3', '.', '.', '.', '.']]
 
-# The given grid is not correct because there are two 1s in the second column. Each column, each
-# row, and each 3 × 3 subgrid can only contain the numbers 1 through 9 one time.
-
-# pseudocode
-# grid is len(grid) x len(grid[0]) in size
-# for each element in grid
-#   get coords (x, y)
-#   determine sector (1-9)
-#   for each row in grid
-#       check row[x] for element
-#       return true if unique
-#   for each element in grid[y]
-#       check element
-#
-#
-#
-
-# for each case
-#   compare to all cases with same x
-#       return False is value of el match
-#   compare to all cases with same y
-#       return False if value of el match
-
-# subgrid
-# sort cases in to 9 possible subgrids
-# (list of nine empty lists?)
-#   if case row 0-2 and col 0-2 -> ninths[0].append(el)
-#   etc, etc
-# for n in ninths
-#   if len(n) > 1
-#       compare els in n, return False is values are equal
-#
-# compare values of each case in subgrid
-
 
 def isUniqueInRowAndCol(value, values):
     for v in values:
@@ -71,7 +37,6 @@ def isUniqueInRowAndCol(value, values):
         if v == value:
             continue
         if (v['row'] == value['row'] or v['col'] == value['col']) and v['value'] == value['value']:
-            print('INVALID', v, value)
             return False
 
     return True
@@ -81,18 +46,6 @@ def translateCoordToSubGrid(value):
     x = math.floor(value['row'] / 3)
     y = math.floor(value['col'] / 3)
     return x, y
-
-
-# def isUniqueInNinth(value, values):
-#     print((values))
-#     # init 3 x 3 grid
-#     subGrid = [[[]] * 3] * 3
-#     for v in values:
-#         print(v)
-#         x, y = translateCoordToSubGrid(v)
-#         subGrid[x][y].append('•')
-#     print(subGrid)
-#     return True
 
 
 def areUniqueInNinths(values):
@@ -116,7 +69,6 @@ def areUniqueInNinths(values):
                     if v == value:
                         continue
                     if (v['value'] == value['value']):
-                        print('INVALID', v, value)
                         return False
 
     return True
@@ -140,6 +92,5 @@ def sudoku2(grid):
     return True
 
 
-print(sudoku2(gridFalse))
-print(sudoku2(gridTrue))
-# print([(x, y) for (x, y) in enumerate(gridFalse)])
+print("Test 1 passes:", sudoku2(gridFalse) == False)
+print("Test 2 passes:", sudoku2(gridTrue) == True)
