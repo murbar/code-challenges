@@ -10,34 +10,34 @@
 
 import math
 
-gridTrue = [['.', '.', '.', '1', '4', '.', '.', '2', '.'],
-            ['.', '.', '6', '.', '.', '.', '.', '.', '.'],
-            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
-            ['.', '.', '1', '.', '.', '.', '.', '.', '.'],
-            ['.', '6', '7', '.', '.', '.', '.', '.', '9'],
-            ['.', '.', '.', '.', '.', '.', '8', '1', '.'],
-            ['.', '3', '.', '.', '.', '.', '.', '.', '6'],
-            ['.', '.', '.', '.', '.', '7', '.', '.', '.'],
-            ['.', '.', '.', '5', '.', '.', '.', '7', '.']]
+grid_true = [['.', '.', '.', '1', '4', '.', '.', '2', '.'],
+             ['.', '.', '6', '.', '.', '.', '.', '.', '.'],
+             ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+             ['.', '.', '1', '.', '.', '.', '.', '.', '.'],
+             ['.', '6', '7', '.', '.', '.', '.', '.', '9'],
+             ['.', '.', '.', '.', '.', '.', '8', '1', '.'],
+             ['.', '3', '.', '.', '.', '.', '.', '.', '6'],
+             ['.', '.', '.', '.', '.', '7', '.', '.', '.'],
+             ['.', '.', '.', '5', '.', '.', '.', '7', '.']]
 
-gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
-             ['.', '.', '.', '.', '6', '.', '.', '.', '.'],
-             ['7', '1', '.', '.', '7', '5', '.', '.', '.'],
-             ['.', '7', '.', '.', '.', '.', '.', '.', '.'],
-             ['.', '.', '.', '.', '8', '3', '.', '.', '.'],
-             ['.', '.', '8', '.', '.', '7', '.', '6', '.'],
-             ['.', '.', '.', '.', '.', '2', '.', '.', '.'],
-             ['.', '1', '.', '2', '.', '.', '.', '.', '.'],
-             ['.', '2', '.', '.', '3', '.', '.', '.', '.']]
+grid_false = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
+              ['.', '.', '.', '.', '6', '.', '.', '.', '.'],
+              ['7', '1', '.', '.', '7', '5', '.', '.', '.'],
+              ['.', '7', '.', '.', '.', '.', '.', '.', '.'],
+              ['.', '.', '.', '.', '8', '3', '.', '.', '.'],
+              ['.', '.', '8', '.', '.', '7', '.', '6', '.'],
+              ['.', '.', '.', '.', '.', '2', '.', '.', '.'],
+              ['.', '1', '.', '2', '.', '.', '.', '.', '.'],
+              ['.', '2', '.', '.', '3', '.', '.', '.', '.']]
 
 
-def translateCoordToSubGrid(value):
+def translate_coords_to_subgrid(value):
     x = math.floor(value['row'] / 3)
     y = math.floor(value['col'] / 3)
     return x, y
 
 
-def isUniqueInRowAndCol(value, values):
+def is_unique_row_and_col(value, values):
     for v in values:
         if v == value:
             continue  # no need to test against self
@@ -47,21 +47,21 @@ def isUniqueInRowAndCol(value, values):
     return True
 
 
-def areUniqueInNinths(values):
+def are_unique_in_subgrid(values):
     # init 3 x 3 grid
     # WHOOPS this creates referenced copies such that mutating one list mutates all nine!
     # amateur hour ↓
     # subGrid = [[[]] * 3] * 3
     # solution ↓
-    subGrid = [[[], [], []],
+    subgrid = [[[], [], []],
                [[], [], []],
                [[], [], []]]
 
     for v in values:
-        x, y = translateCoordToSubGrid(v)
-        subGrid[x][y].append(v)
+        x, y = translate_coords_to_subgrid(v)
+        subgrid[x][y].append(v)
 
-    for row in subGrid:
+    for row in subgrid:
         for location in row:
             # must have two to compare, else valid
             if not len(location) > 1:
@@ -88,15 +88,15 @@ def extract_values(grid):
 def sudoku2(grid):
     values = extract_values(grid)
 
-    if not areUniqueInNinths(values):
+    if not are_unique_in_subgrid(values):
         return False
 
     for value in values:
-        if not isUniqueInRowAndCol(value, values):
+        if not is_unique_row_and_col(value, values):
             return False
 
     return True
 
 
-print("Test 1 passes:", sudoku2(gridFalse) == False)
-print("Test 2 passes:", sudoku2(gridTrue) == True)
+print("Test 1 passes:", sudoku2(grid_false) == False)
+print("Test 2 passes:", sudoku2(grid_true) == True)
