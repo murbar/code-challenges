@@ -32,6 +32,12 @@ const gridFalse = [
   ['.', '2', '.', '.', '3', '.', '.', '.', '.']
 ];
 
+function translateCoordsToSubGrid(value) {
+  const x = Math.floor(value.row / 3);
+  const y = Math.floor(value.col / 3);
+  return [x, y];
+}
+
 function areUniqueInSubGrid(values) {
   return true;
 }
