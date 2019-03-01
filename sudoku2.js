@@ -46,7 +46,7 @@ function isUniqueInRowAndCol(value, values) {
   return true;
 }
 
-function sudoku2(grid) {
+function extractValues(grid) {
   const values = [];
   grid.forEach((row, x) => {
     row.forEach((value, y) => {
@@ -58,6 +58,11 @@ function sudoku2(grid) {
         });
     });
   });
+  return values;
+}
+
+function sudoku2(grid) {
+  const values = extractValues(grid);
 
   if (!areUniqueInSubGrid(values)) return false;
 
