@@ -33,9 +33,8 @@ gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
 
 def isUniqueInRowAndCol(value, values):
     for v in values:
-        # don't compare case with itself
         if v == value:
-            continue
+            continue  # no need to test against self
         if (v['row'] == value['row'] or v['col'] == value['col']) and v['value'] == value['value']:
             return False
 
@@ -64,12 +63,14 @@ def areUniqueInNinths(values):
 
     for row in subGrid:
         for location in row:
-            for value in location:
-                for v in location:
-                    if v == value:
-                        continue
-                    if (v['value'] == value['value']):
-                        return False
+            # not invalid if it's the only value in the grid
+            if len(location) > 1:
+                for value in location:
+                    for v in location:
+                        if v == value:
+                            continue  # no need to test against self
+                        if (v['value'] == value['value']):
+                            return False
 
     return True
 
