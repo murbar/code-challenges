@@ -70,7 +70,7 @@ def areUniqueInNinths(values):
                 for v in location:
                     if v == value:
                         continue  # no need to test against self
-                    if (v['value'] == value['value']):
+                    if v['value'] == value['value']:
                         return False
 
     return True
