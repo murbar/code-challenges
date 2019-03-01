@@ -63,37 +63,38 @@ gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
 # compare values of each case in subgrid
 
 
-def isUniqueInRowAndCol(case, cases):
-    for i in cases:
-        if i == case:
+def isUniqueInRowAndCol(value, values):
+    for v in values:
+        # don't compare case with itself
+        if v == value:
             continue
-        # combine these in future with logical or and ()
-        if (i['row'] == case['row'] or i['col'] == case['col']) and i['value'] == case['value']:
-            print('INVALID', i, case)
+        if (v['row'] == value['row'] or v['col'] == value['col']) and v['value'] == value['value']:
+            print('INVALID', v, value)
             return False
 
     return True
 
 
-def isUniqueInNinth(case, cases):
+def isUniqueInNinth(value, values):
+    # init 3 x 3 grid
+    subGrid = [[[]] * 3] * 3
     return True
 
 
-def isValid(case, cases, grid):
-    return isUniqueInRowAndCol(case, cases) and isUniqueInNinth(case, cases)
+def isValid(value, values):
+    return isUniqueInRowAndCol(value, values) and isUniqueInNinth(value, values)
 
 
 def sudoku2(grid):
-    cases = []
 
+    values = []
     for x, row in enumerate(grid):
         for y, value in enumerate(row):
             if value in '0123456789':
-                cases.append({'value': value, 'row': x, 'col': y})
+                values.append({'value': value, 'row': x, 'col': y})
 
-    print(cases)
-    for case in cases:
-        if not isValid(case, cases, grid):
+    for value in values:
+        if not isValid(value, values):
             return False
 
     return True
