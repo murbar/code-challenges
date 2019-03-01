@@ -131,7 +131,7 @@ def sudoku2(grid):
                 values.append({'value': value, 'row': x, 'col': y})
 
     if not areUniqueInNinths(values):
-        retturn False
+        return False
 
     for value in values:
         if not isUniqueInRowAndCol(value, values):
