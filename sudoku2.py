@@ -77,7 +77,7 @@ def isUniqueInRowAndCol(value, values):
     return True
 
 
-def translateCoord(value):
+def translateCoordToSubGrid(value):
     x = math.floor(value['row'] / 3)
     y = math.floor(value['col'] / 3)
     return x, y
@@ -89,7 +89,7 @@ def translateCoord(value):
 #     subGrid = [[[]] * 3] * 3
 #     for v in values:
 #         print(v)
-#         x, y = translateCoord(v)
+#         x, y = translateCoordToSubGrid(v)
 #         subGrid[x][y].append('•')
 #     print(subGrid)
 #     return True
@@ -106,7 +106,7 @@ def areUniqueInNinths(values):
                [[], [], []]]
 
     for v in values:
-        x, y = translateCoord(v)
+        x, y = translateCoordToSubGrid(v)
         subGrid[x][y].append(v)
 
     for row in subGrid:
@@ -141,4 +141,5 @@ def sudoku2(grid):
 
 
 print(sudoku2(gridFalse))
+print(sudoku2(gridTrue))
 # print([(x, y) for (x, y) in enumerate(gridFalse)])
