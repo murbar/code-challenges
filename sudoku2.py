@@ -8,6 +8,8 @@
 # Sudoku puzzle according to the layout rules described above. Note that the puzzle represented by
 # grid does not have to be solvable.
 
+import math
+
 gridTrue = [['.', '.', '.', '1', '4', '.', '.', '2', '.'],
             ['.', '.', '6', '.', '.', '.', '.', '.', '.'],
             ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
@@ -75,9 +77,48 @@ def isUniqueInRowAndCol(value, values):
     return True
 
 
-def isUniqueInNinth(value, values):
+def translateCoord(value):
+    x = math.floor(value['row'] / 3)
+    y = math.floor(value['col'] / 3)
+    return x, y
+
+
+# def isUniqueInNinth(value, values):
+#     print((values))
+#     # init 3 x 3 grid
+#     subGrid = [[[]] * 3] * 3
+#     for v in values:
+#         print(v)
+#         x, y = translateCoord(v)
+#         subGrid[x][y].append('•')
+#     print(subGrid)
+#     return True
+
+
+def areUniqueInNinths(values):
     # init 3 x 3 grid
-    subGrid = [[[]] * 3] * 3
+    # WHOOPS this creates referenced copies such that mutating one list mutates all nine!
+    # amateur hour ↓
+    # subGrid = [[[]] * 3] * 3
+    # solution ↓
+    subGrid = [[[], [], []],
+               [[], [], []],
+               [[], [], []]]
+
+    for v in values:
+        x, y = translateCoord(v)
+        subGrid[x][y].append(v)
+
+    for row in subGrid:
+        for location in row:
+            for value in location:
+                for v in location:
+                    if v == value:
+                        continue
+                    if (v['value'] == value['value']):
+                        print('INVALID', v, value)
+                        return False
+
     return True
 
 
@@ -93,9 +134,11 @@ def sudoku2(grid):
             if value in '0123456789':
                 values.append({'value': value, 'row': x, 'col': y})
 
-    for value in values:
-        if not isValid(value, values):
-            return False
+    # for value in values:
+    #     if not isValid(value, values):
+    #         return False
+
+    areUniqueInNinths(values)
 
     return True
 
