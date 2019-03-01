@@ -31,6 +31,12 @@ gridFalse = [['.', '.', '.', '.', '2', '.', '.', '9', '.'],
              ['.', '2', '.', '.', '3', '.', '.', '.', '.']]
 
 
+def translateCoordToSubGrid(value):
+    x = math.floor(value['row'] / 3)
+    y = math.floor(value['col'] / 3)
+    return x, y
+
+
 def isUniqueInRowAndCol(value, values):
     for v in values:
         if v == value:
@@ -39,12 +45,6 @@ def isUniqueInRowAndCol(value, values):
             return False
 
     return True
-
-
-def translateCoordToSubGrid(value):
-    x = math.floor(value['row'] / 3)
-    y = math.floor(value['col'] / 3)
-    return x, y
 
 
 def areUniqueInNinths(values):
