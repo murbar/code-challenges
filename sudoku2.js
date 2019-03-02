@@ -119,5 +119,50 @@ function sudoku2(grid) {
   return true;
 }
 
-console.log('Test 1 passes: ', sudoku2(gridFalse) === false);
-console.log('Test 2 passes: ', sudoku2(gridTrue) === true);
+// console.log('Test 1 passes: ', sudoku2(gridFalse) === false);
+// console.log('Test 2 passes: ', sudoku2(gridTrue) === true);
+
+/* 
+Alternative algo:
+functional style
+list all coords for each num element in grid
+  get list of all nums in rows
+  get list of all nums in cols
+  get list of all nums in each subgrid
+  check length list length equals set(list) length
+  if so, all valid
+
+*/
+
+// helpers
+const areAllUnique = numsArr => numsArr.length === new Set(numsArr).size;
+const filterOnlyNums = arr => arr.filter(i => !isNaN(i));
+const isTrue = v => !!v;
+// rows and cols
+const groupValid = row => areAllUnique(filterOnlyNums(row));
+const rowsValid = grid => grid.map(groupValid).every(isTrue);
+const getCol = (_, i, grid) => grid.map(row => row[i]);
+// const getCols = grid => grid.map(getCol);
+const colsValid = grid =>
+  grid
+    .map(getCol)
+    .map(groupValid)
+    .every(isTrue);
+
+// subgrid
+// stub
+const subGridsValid = grid => true;
+
+const puzzleValid = grid => rowsValid(grid) && colsValid(grid) && subGridsValid(grid);
+
+// function sudoku2(grid) {
+//   return puzzleValid(grid);
+// }
+
+// console.log(gridTrue));
+// const mapper = (a, b, c, d) => console.log(a, b, c, d);
+// const ar = [1, 2, 3, 4];
+
+// console.log(getCols(gridTrue, 2));
+console.log(rowsAndColsAreValid(gridTrue));
+// console.log(ar.map(mapper));
