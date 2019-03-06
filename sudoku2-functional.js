@@ -44,35 +44,22 @@ const gridFalse2 = [
   ['.', '.', '.', '8', '.', '.', '.', '.', '.']
 ];
 
-/* 
-Alternative algo:
-functional style
-list all coords for each num element in grid
-  get list of all nums in rows
-  get list of all nums in cols
-  get list of all nums in each subgrid
-  check length list length equals set(list) length
-  if so, all valid
-
-*/
-
 // helpers
 const allUnique = arr => arr.length === new Set(arr).size;
 const filterOnlyNums = arr => arr.filter(i => !isNaN(i));
 const isTrue = v => !!v;
-// rows and cols
 const groupValid = items => allUnique(filterOnlyNums(items));
-const rowsValid = grid => grid.map(groupValid).every(isTrue);
+
+// rows and cols
+const rowsValid = grid => grid.map(groupValid);
 const getCol = (_, i, grid) => grid.map(row => row[i]);
-// const getCols = grid => grid.map(getCol);
 const colsValid = grid =>
   grid
     .map(getCol)
     .map(groupValid)
     .every(isTrue);
 
-// subgrid
-// stub
+// sub grids
 const subGridOrigins = [[0, 0], [0, 3], [0, 6], [3, 0], [3, 3], [3, 6], [6, 0], [6, 3], [6, 6]];
 const getSubGrid = grid =>
   subGridOrigins.map(([x, y]) => [
@@ -87,7 +74,6 @@ const subGridsValid = grid =>
 
 const sudoku2 = grid => rowsValid(grid) && colsValid(grid) && subGridsValid(grid);
 
-// these tests pass but there is a bug here somewhere
 console.log('Test 1 passes: ', sudoku2(gridFalse) === false);
 console.log('Test 2 passes: ', sudoku2(gridTrue) === true);
 console.log('Test 3 passes: ', sudoku2(gridFalse2) === false);
