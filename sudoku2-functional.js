@@ -32,6 +32,18 @@ const gridFalse = [
   ['.', '2', '.', '.', '3', '.', '.', '.', '.']
 ];
 
+const gridFalse2 = [
+  ['.', '4', '.', '.', '.', '.', '.', '.', '.'],
+  ['.', '.', '4', '.', '.', '.', '.', '.', '.'],
+  ['.', '.', '.', '1', '.', '.', '7', '.', '.'],
+  ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['.', '.', '.', '3', '.', '.', '.', '6', '.'],
+  ['.', '.', '.', '.', '.', '6', '.', '9', '.'],
+  ['.', '.', '.', '.', '1', '.', '.', '.', '.'],
+  ['.', '.', '.', '.', '.', '.', '2', '.', '.'],
+  ['.', '.', '.', '8', '.', '.', '.', '.', '.']
+];
+
 /* 
 Alternative algo:
 functional style
@@ -78,3 +90,4 @@ const sudoku2 = grid => rowsValid(grid) && colsValid(grid) && subGridsValid(grid
 // these tests pass but there is a bug here somewhere
 console.log('Test 1 passes: ', sudoku2(gridFalse) === false);
 console.log('Test 2 passes: ', sudoku2(gridTrue) === true);
+console.log('Test 3 passes: ', sudoku2(gridFalse2) === false);
