@@ -1,7 +1,11 @@
 # Solutions to Assorted Code Challenges
 
-A log of my solutions to code challenges, in Python 3 and modern JavaScript.
+_Learning in public_ 🤓
 
-Part of my ongoing effort to _learn in public._
+A log of my solutions to code challenges, mostly in Python 3 and JavaScript.
 
-Visit [my profile on HackerRank](https://www.hackerrank.com/murbar).
+Find me on...
+
+- [HackerRank](https://www.hackerrank.com/murbar)
+- [LeetCode](https://leetcode.com/murbar/)
+- [CodeSignal](https://app.codesignal.com/profile/murbar)
