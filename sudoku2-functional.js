@@ -51,7 +51,7 @@ const isTrue = v => !!v;
 const groupValid = items => allUnique(filterOnlyNums(items));
 
 // rows and cols
-const rowsValid = grid => grid.map(groupValid);
+const rowsValid = grid => grid.map(groupValid).every(isTrue);
 const getCol = (_, i, grid) => grid.map(row => row[i]);
 const colsValid = grid =>
   grid
