@@ -44,6 +44,18 @@ const gridFalse2 = [
   ['.', '.', '.', '8', '.', '.', '.', '.', '.']
 ];
 
+const gridFalse3 = [
+  ['7', '.', '.', '.', '4', '.', '.', '.', '.'],
+  ['.', '.', '.', '8', '6', '5', '.', '.', '.'],
+  ['.', '1', '.', '2', '.', '.', '.', '.', '.'],
+  ['.', '.', '.', '.', '.', '9', '.', '.', '.'],
+  ['.', '.', '.', '.', '5', '.', '5', '.', '.'],
+  ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['.', '.', '.', '.', '.', '.', '2', '.', '.'],
+  ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+  ['.', '.', '.', '.', '.', '.', '.', '.', '.']
+];
+
 // helpers
 const allUnique = arr => arr.length === new Set(arr).size;
 const filterOnlyNums = arr => arr.filter(i => !isNaN(i));
@@ -77,3 +89,4 @@ const sudoku2 = grid => rowsValid(grid) && colsValid(grid) && subGridsValid(grid
 console.log('Test 1 passes: ', sudoku2(gridFalse) === false);
 console.log('Test 2 passes: ', sudoku2(gridTrue) === true);
 console.log('Test 3 passes: ', sudoku2(gridFalse2) === false);
+console.log('Test 4 passes: ', sudoku2(gridFalse3) === false);
