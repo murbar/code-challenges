@@ -61,14 +61,14 @@ const colsValid = grid =>
 
 // sub grids
 const subGridOrigins = [[0, 0], [0, 3], [0, 6], [3, 0], [3, 3], [3, 6], [6, 0], [6, 3], [6, 6]];
-const getSubGrid = grid =>
+const getSubGrids = grid =>
   subGridOrigins.map(([x, y]) => [
     ...grid[x].slice(y, y + 3),
     ...grid[x + 1].slice(y, y + 3),
     ...grid[x + 2].slice(y, y + 3)
   ]);
 const subGridsValid = grid =>
-  getSubGrid(grid)
+  getSubGrids(grid)
     .map(groupValid)
     .every(isTrue);
 
