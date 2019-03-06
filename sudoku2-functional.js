@@ -68,7 +68,10 @@ const getSubGrid = grid =>
     ...grid[x + 1].slice(y, y + 3),
     ...grid[x + 2].slice(y, y + 3)
   ]);
-const subGridsValid = grid => true;
+const subGridsValid = grid =>
+  getSubGrid(grid)
+    .map(groupValid)
+    .every(isTrue);
 
 const sudoku2 = grid => rowsValid(grid) && colsValid(grid) && subGridsValid(grid);
 
