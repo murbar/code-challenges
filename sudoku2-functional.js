@@ -90,3 +90,10 @@ console.log('Test 1 passes: ', sudoku2(gridFalse) === false);
 console.log('Test 2 passes: ', sudoku2(gridTrue) === true);
 console.log('Test 3 passes: ', sudoku2(gridFalse2) === false);
 console.log('Test 4 passes: ', sudoku2(gridFalse3) === false);
+
+// const genSubGridOrigins = (grid) => {
+//   grid.reduce((origins, row) => {
+//
+//   }, [])
+// }
+// -> [[0, 0], [0, 3], [0, 6], [3, 0], [3, 3], [3, 6], [6, 0], [6, 3], [6, 6]]
