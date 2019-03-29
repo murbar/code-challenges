@@ -5,10 +5,11 @@ function scrabbleRank(sentence) {
   const alpha = 'abcdefghijklmnopqrstuvwxyz';
 
   const scores = words.map(w => {
-    const score = w.split('').reduce((score, char) => {
+    const word = w.replace(/[^a-z]/gi, ''); // googled it!
+    const score = word.split('').reduce((score, char) => {
       return score + alpha.indexOf(char.toLowerCase()) + 1;
     }, 0);
-    return { word: w, score };
+    return { word, score };
   });
 
   const sorted = scores.sort((a, b) => b.score - a.score);
