@@ -1,10 +1,8 @@
 function arrayRangeRec(num = 100, start = 1, arr = []) {
-  if (num > 0) {
-    arr.push(start);
-    // console.log(arr);
-    arrayRangeRec(num - 1, start + 1, arr);
-  }
-  return arr;
+  if (num === 0) return arr;
+
+  arr.push(start);
+  return arrayRangeRec(num - 1, start + 1, arr);
 }
 
 function arrayRangeLoop(num = 100) {
@@ -15,21 +13,22 @@ function arrayRangeLoop(num = 100) {
   return arr;
 }
 
-function doTimes(times, fn) {
+function doTimes(times, callback) {
   for (let i = 0; i < times; i++) {
-    fn();
+    callback();
   }
 }
 
 function timeIt(fn, label = 'It') {
   const start = process.hrtime();
   fn();
-  const end = process.hrtime(start);
-  console.log(`${label} took ${Math.round(end[0] * 1000 + end[1] / 1000000)}ms`);
+  const [elapsedSec, elapsedNanoSec] = process.hrtime(start);
+  const ms = Math.round(elapsedSec * 1000 + elapsedNanoSec / 1000000);
+  console.log(`${label} took ${ms} ms`);
 }
 
-const arrLength = 99;
-const iterations = 1000000;
+const arrLength = 5000;
+const iterations = 1000;
 
 timeIt(() => {
   doTimes(iterations, () => {
