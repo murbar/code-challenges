@@ -5,7 +5,7 @@
 // Follow-up: what if you can't use division?
 
 const arrayProduct = array => {
-  return array.map((num, index) => {
+  return array.map((_, index) => {
     return array.filter((_, i) => i !== index).reduce((product, n) => product * n, 1);
   });
 };
