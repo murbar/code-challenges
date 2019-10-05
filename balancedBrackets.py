@@ -42,3 +42,36 @@ def isValid2(self, s: str) -> bool:
                 return False
 
     return not stack
+
+
+valid_pairs = '()[]{}||'
+
+
+def parseString(string):
+    result = ''
+    for ch in string:
+        if ch in valid_pairs:
+            result += ch
+    return result
+
+
+def balanced_brackets(string):
+    stack = []
+    open_pipe = False
+
+    for ch in parseString(string):
+        if ch in '[({|' and not open_pipe:
+            stack.append(ch)
+            if ch == '|':
+                open_pipe = not open_pipe
+        else:
+            if len(stack) == 0 or stack.pop() + ch not in valid_pairs:
+                return False
+            if ch == '|':
+                open_pipe = not open_pipe
+
+    return len(stack) == 0 or not open_pipe
+
+
+print(balanced_brackets("([)]"))  # false
+print(balanced_brackets("(foo[barr]||)"))  # true
