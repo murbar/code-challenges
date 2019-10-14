@@ -1,6 +1,9 @@
 # https://www.freecodecamp.org/news/how-to-play-and-win-sudoku-using-math-and-machine-learning-to-solve-every-sudoku-puzzle/
 
 
+from timeit import timeit
+
+
 def cross(A, B):
     "Cross product of elements in A and elements in B."
     return [a+b for a in A for b in B]
@@ -15,7 +18,7 @@ unitlist = ([cross(rows, c) for c in cols] +
             [cross(rs, cs) for rs in ('ABC', 'DEF', 'GHI') for cs in ('123', '456', '789')])
 units = dict((s, [u for u in unitlist if s in u])
              for s in squares)
-peers = dict((s, set(sum(units[s], []))-set([s]))
+peers = dict((s, set(sum(units[s], [])) - set([s]))
              for s in squares)
 
 
@@ -96,6 +99,36 @@ def some(seq):
 
 
 puzzle = '000001200100700045000430700090006300050807020006200090003019000970004006002500000'
+hardPuzzle = '''
+8 5 . |. . 2 |4 . . 
+7 2 . |. . . |. . 9 
+. . 4 |. . . |. . . 
+------+------+------
+. . . |1 . 7 |. . 2 
+3 . 5 |. . . |9 . . 
+. 4 . |. . . |. . . 
+------+------+------
+. . . |. 8 . |. 7 . 
+. 1 7 |. . . |. . . 
+. . . |. 3 6 |. 4 .'''
 
-print(solve(puzzle))
-print(''.join([v for v in solve(puzzle).values()]))
+# 189 seconds for Norvig, 132 on 2016 MacBook Pro
+longSolve = '''
+. . . |. . 6 |. . . 
+. 5 9 |. . . |. . 8 
+2 . . |. . 8 |. . . 
+------+------+------
+. 4 5 |. . . |. . . 
+. . 3 |. . . |. . . 
+. . 6 |. . 3 |. 5 4 
+------+------+------
+. . . |3 2 5 |. . 6 
+. . . |. . . |. . . 
+. . . |. . . |. . . '''
+
+# print(solve(hardPuzzle))
+print(''.join([v for v in solve(hardPuzzle).values()]))
+
+
+# print('hard puzzle', timeit(lambda: solve(hardPuzzle), number=1))
+# print('long puzzle', timeit(lambda: solve(longSolve), number=1))
