@@ -22,6 +22,7 @@ def fibR(n):
     return fibR(n-1) + fibR(n-2)
 
 # we can memoize this with a generic memoize function
+# would be a good usecase for a decorator so we don't hav eto overwrite the function name
 
 
 def memoize(fn):
