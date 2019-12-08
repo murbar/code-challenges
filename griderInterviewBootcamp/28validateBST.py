@@ -14,17 +14,17 @@ node may be valid but maybe not when compared to parent
 from binarytree import BinaryTreeNode
 
 
-def validate(root, min=None, max=None):
-    if max is not None and root.value >= max:
+def validate(root, low_limit=None, high_limit=None):
+    if high_limit is not None and root.value >= high_limit:
         return False
 
-    if min is not None and root.value < min:
+    if low_limit is not None and root.value < low_limit:
         return False
 
-    if root.left and not validate(root.left, min, root.value):
+    if root.left and not validate(root.left, low_limit, root.value):
         return False
 
-    if root.right and not validate(root.right, root.value, max):
+    if root.right and not validate(root.right, root.value, high_limit):
         return False
 
     return True
