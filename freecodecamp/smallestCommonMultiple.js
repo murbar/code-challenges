@@ -32,3 +32,25 @@ function smallestCommon(arr) {
     }
   }
 }
+
+const isValidInRange = (m, min, max) => {
+  for (let i = min; i < max; i++) {
+    if (m % i !== 0) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+const smallestCommon2 = arr => {
+  let max = Math.max(...arr);
+  let min = Math.min(...arr);
+  let scm = max;
+
+  while (!isValidInRange(scm, min, max)) {
+    scm += max;
+  }
+
+  return scm;
+};
