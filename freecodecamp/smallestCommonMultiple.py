@@ -17,7 +17,7 @@ def smallest_common_multiple(arr):
 
     while True:
         found = True
-        # print(scm)
+
         for i in range(a, b+1):
             valid = scm % a == 0 and scm % b == 0 and scm % i == 0
             if not valid:
