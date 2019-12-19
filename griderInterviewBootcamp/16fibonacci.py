@@ -14,6 +14,19 @@ def fib(n):
     return series[-1]
 
 
+def fibImproved(n):
+    # save memory - only keep last two values of sequence
+    if n < 2:
+        return n
+
+    cur, nxt = 0, 1
+    while n:
+        cur, nxt = nxt, cur + nxt
+        n -= 1
+
+    return cur
+
+
 def fibR(n):
     # exponential runtime
     if n < 2:
@@ -49,6 +62,7 @@ def fibRM(n, memo={}):
 assert fib(4) == 3
 assert fib(10) == 55
 assert fib(50) == 12586269025
+assert fibImproved(50) == 12586269025
 assert fibR(4) == 3
 assert fibR(10) == 55
 assert fibRM(4) == 3
