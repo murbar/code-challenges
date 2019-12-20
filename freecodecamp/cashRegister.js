@@ -1,5 +1,5 @@
 // Create an array of objects which hold the denominations and their values
-let denom = [
+let denominations = [
   { name: 'ONE HUNDRED', val: 100.0 },
   { name: 'TWENTY', val: 20.0 },
   { name: 'TEN', val: 10.0 },
@@ -12,34 +12,28 @@ let denom = [
 ];
 
 function checkCashRegister(price, cash, cid) {
-  let output = { status: null, change: [] };
   let change = cash - price;
 
   // Transform CID array into drawer object
   let register = cid.reduce(
-    function(acc, curr) {
-      acc.total += curr[1];
-      acc[curr[0]] = curr[1];
+    (acc, curr) => {
+      const [denom, amt] = curr;
+      acc.total += amt;
+      acc[demon] = amt;
       return acc;
     },
     { total: 0 }
   );
 
-  // Handle exact change
   if (register.total === change) {
-    output.status = 'CLOSED';
-    output.change = cid;
-    return output;
+    return { status: 'CLOSED', change: cid };
   }
 
-  // Handle obvious insufficient funds
   if (register.total < change) {
-    output.status = 'INSUFFICIENT_FUNDS';
-    return output;
+    return { status: 'INSUFFICIENT_FUNDS', change: [] };
   }
 
-  // Loop through the denomination array
-  let change_arr = denom.reduce(function(acc, curr) {
+  let change_arr = denominations.reduce(function(arr, curr) {
     let value = 0;
     // While there is still money of this type in the drawer
     // And while the denomination is larger than the change remaining
@@ -48,27 +42,22 @@ function checkCashRegister(price, cash, cid) {
       register[curr.name] -= curr.val;
       value += curr.val;
 
-      // Round change to the nearest hundreth deals with precision errors
+      // Round change to the nearest hundredth deals with precision errors
       change = Math.round(change * 100) / 100;
     }
     // Add this denomination to the output only if any was used.
     if (value > 0) {
-      acc.push([curr.name, value]);
+      arr.push([curr.name, value]);
     }
-    return acc; // Return the current change_arr
-  }, []); // Initial value of empty array for reduce
+    return arr;
+  }, []);
 
-  // If there are no elements in change_arr or we have leftover change, return
-  // the string "Insufficient Funds"
+  // If there are no elements in change_arr or we have leftover change
   if (change_arr.length < 1 || change > 0) {
-    output.status = 'INSUFFICIENT_FUNDS';
-    return output;
+    return { status: 'INSUFFICIENT_FUNDS', change: [] };
   }
 
-  // Here is your change, ma'am.
-  output.status = 'OPEN';
-  output.change = change_arr;
-  return output;
+  return { status: 'OPEN', change: change_arr };
 }
 
 // test here
