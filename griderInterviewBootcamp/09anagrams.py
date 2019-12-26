@@ -11,23 +11,22 @@ def anagrams(stringA, stringB):
 
 def anagrams2(stringA, stringB):
     # O(2n + m)
-    def count_chars(string):
-        counts = {}
-        for ch in string:
-            ch = ch.lower()
-            if ch.isalpha():
-                counts.setdefault(ch, 0)
-                counts[ch] = counts[ch] + 1
-        return counts
+    stringA = ''.join([ch.lower() for ch in stringA if ch.isalpha()])
+    stringB = ''.join([ch.lower() for ch in stringB if ch.isalpha()])
 
-    countsA = count_chars(stringA)
-    countsB = count_chars(stringB)
-
-    if len(countsA) != len(countsB):
+    if len(stringA) != len(stringB):
         return False
 
-    for k, v in countsA.items():
-        if v != countsB[k]:
+    counts = {}
+    for i in range(len(stringA)):
+        a, b = stringA[i], stringB[i]
+        if a.isalpha():
+            counts[a] = counts.get(a, 0) + 1
+        if b.isalpha():
+            counts[b] = counts.get(b, 0) - 1
+
+    for c in counts.values():
+        if c != 0:
             return False
 
     return True
