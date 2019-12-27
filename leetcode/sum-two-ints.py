@@ -34,7 +34,9 @@
 #     return add(~a, 1) if negative else a
 
 
-# not my solution, need to study utility of the mask
+# not my solution
+# Python ints are more than 32 bits
+# use a mask to get the last 32 bits
 def sum(a, b):
     mask = 0xffffffff
 
