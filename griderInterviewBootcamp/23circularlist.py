@@ -12,7 +12,6 @@ def is_circular(llist):
     while fast.next and fast.next.next:
         slow = slow.next
         fast = fast.next.next
-        i += 1
         if slow is fast:
             return True
 
