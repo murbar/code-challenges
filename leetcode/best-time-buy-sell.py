@@ -15,7 +15,6 @@ def maxProfit(prices) -> int:
         min_price = min(current_price, min_price)
 
     # no transaction if profit is negative
-    # otherwise just return max_profit
     return max(max_profit, 0)
 
 
