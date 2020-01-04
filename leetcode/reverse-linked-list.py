@@ -16,7 +16,7 @@
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        # end of list, None/null
+        # preceding is new end of list, None/null
         preceding = None
         current = head
         following = head
@@ -30,5 +30,18 @@ class Solution:
             preceding = current
             # process next node
             current = following
+
+        return preceding
+
+    def reverseList2(self, head: ListNode) -> ListNode:
+        # simplified, fewer variables
+        preceding = None
+        while head:
+            # pattern here is a chain of assignments:
+            # follwing -> head.next -> preceding -> head -> following
+            following = head.next
+            head.next = preceding
+            preceding = head
+            head = following
 
         return preceding
