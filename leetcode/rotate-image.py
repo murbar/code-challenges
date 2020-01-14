@@ -13,6 +13,7 @@
 # first transposing on the diagonal, then flipping horizontally
 
 from typing import List
+import math
 
 
 class Solution:
@@ -55,6 +56,19 @@ class Solution:
         # no return
 
     def rotate2(self, matrix: List[List[int]]) -> None:
+        size = len(matrix)
+
+        for i in range(size // 2):
+            for j in range(math.ceil(size / 2)):
+                # right = size-1-j
+                # name these variables
+                temp = matrix[i][j]
+                matrix[i][j] = matrix[size-1-j][i]
+                matrix[size-1-j][i] = matrix[size-1-i][size-1-j]
+                matrix[size-1-i][size-1-j] = matrix[j][size-1-i]
+                matrix[j][size-1-i] = temp
+
+    def rotate3(self, matrix: List[List[int]]) -> None:
         # while this solution is less code, if feel less intuitive to me
         # not sure I would have figured out that rotation == transposition + flip
         # similar performance, O(n) time
@@ -144,3 +158,17 @@ r7 = [
 ]
 s.rotate(l7)
 assert l7 == r7
+l8 = [
+    [5, 1, 9, 11],
+    [2, 4, 8, 10],
+    [13, 3, 6, 7],
+    [15, 14, 12, 16]
+]
+r8 = [
+    [15, 13, 2, 5],
+    [14, 3, 4, 1],
+    [12, 6, 8, 9],
+    [16, 7, 10, 11]
+]
+s.rotate2(l8)
+assert l8 == r8
