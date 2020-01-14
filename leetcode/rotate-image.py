@@ -36,19 +36,17 @@ class Solution:
             # iterate of each value in this layer
             for i in range(bottom - top):
                 # 4-way swap
-                # top left -> top right
-                target = matrix[top+i][right]
-                matrix[top+i][right] = matrix[top][left+i]
-                # prev top right -> bottom right
-                source = target
-                target = matrix[bottom][right-i]
-                matrix[bottom][right-i] = source
-                # prev bottom right -> bottom left
-                source = target
-                target = matrix[bottom-i][left]
-                matrix[bottom-i][left] = source
-                # prev bottom left -> top left
-                matrix[top][left+i] = target
+                # cache top left
+                top_left = matrix[top][left+i]
+                # bottom left -> top left
+                matrix[top][left+i] = matrix[bottom-i][left]
+                # bottom right -> bottom left
+                matrix[bottom-i][left] = matrix[bottom][right-i]
+                # top right -> bottom right
+                matrix[bottom][right-i] = matrix[top+i][right]
+                # original top left -> top right
+                matrix[top+i][right] = top_left
+
             # move to next inner layer
             top += 1
             bottom -= 1
