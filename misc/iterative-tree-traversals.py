@@ -2,7 +2,7 @@ from typing import List
 
 '''
      DFS                 DFS                  DFS                 BFS
- Post-order           Pre-order             In-order
+ Post-order           Pre-order             In-order           Level-order
 Bottom -> Top       Top -> Bottom    Left -> Root -> Right    Left -> Right
 Left -> Right       Left -> Right                             Top -> Bottom
 
@@ -11,6 +11,9 @@ Left -> Right       Left -> Right                             Top -> Bottom
     3   4               2   5                2   5               2   3
    / \                 / \                  / \                 / \
   1   2               3   4                1   3               4   5
+
+
+Binary search tree in-order traversal returns values ordered smallest to largest
 '''
 
 
