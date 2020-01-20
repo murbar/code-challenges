@@ -1,56 +1,70 @@
 # https://leetcode.com/problems/valid-palindrome/
 
-
-class Solution:
-    def isPalindrome(self, s: str) -> bool:
-        chars = [c.lower() for c in s if c.isalnum()]
-
-        if not len(chars):
-            return True
-
-        i, j = 0, len(chars) - 1
-        while i < j:
-            if chars[i] != chars[j]:
-                return False
-            i += 1
-            j -= 1
-
-        return True
+# problem seems to be broken on leetcode
+# edge case: is an empty string a palindrome?
 
 
-# https://leetcode.com/problems/valid-palindrome-ii/
-# is it a palindrome with any one letter removed?
-class Solution2:
-    def validPalindrome(self, s: str) -> bool:
+def is_palindrome(s):
+    chars = [c.lower() for c in s if c.isalpha()]
 
-        def helper(word, error=False):
-            if not len(word):
-                return True
+    i, j = 0, len(chars) - 1
+    while i < j:
+        if chars[i] != chars[j]:
+            return False
+        i += 1
+        j -= 1
 
-            i, j = 0, len(word) - 1
-            while i < j:
-                if word[i] != word[j]:
-                    if error:
-                        return False
-                    else:
-                        without_i = s[:i] + s[i+1:]
-                        without_j = s[:j] + s[j+1:]
-                        return helper(without_i, True) or helper(without_j, True)
-                i += 1
-                j -= 1
+    return True
 
-            return True
 
-        return helper(s)
+def is_palindrome2(s):
+    chars = [c.lower() for c in s if c.isalpha()]
+    return all(chars[i] == chars[~i] for i in range(len(chars) // 2))
 
-    # not my solution
-    def validPalindrome2(self, s):
-        def is_pali_range(i, j):
-            return all(s[k] == s[j-k+i] for k in range(i, j))
 
-        for i in range(len(s) / 2):
-            # ~1 == -(i+1)
-            if s[i] != s[~i]:
-                j = len(s) - 1 - i
-                return is_pali_range(i+1, j) or is_pali_range(i, j-1)
-        return True
+def is_palindrome3(s):
+    chars = [c.lower() for c in s if c.isalpha()]
+    return chars == chars[::-1]
+
+
+assert not is_palindrome('asdf')
+assert not is_palindrome('abaa')
+assert not is_palindrome('abbaa')
+assert not is_palindrome('ab')
+assert is_palindrome('aa')
+assert is_palindrome('a')
+assert is_palindrome('')
+assert is_palindrome('aca')
+assert is_palindrome('aabbaa')
+assert is_palindrome('aabcbaa')
+assert is_palindrome("A man, a plan, a canal: Panama")
+assert is_palindrome("")
+assert not is_palindrome("race a car")
+
+assert not is_palindrome2('asdf')
+assert not is_palindrome2('abaa')
+assert not is_palindrome2('abbaa')
+assert not is_palindrome2('ab')
+assert is_palindrome2('aa')
+assert is_palindrome2('a')
+assert is_palindrome2('')
+assert is_palindrome2('aca')
+assert is_palindrome2('aabbaa')
+assert is_palindrome2('aabcbaa')
+assert is_palindrome2("A man, a plan, a canal: Panama")
+assert is_palindrome2("")
+assert not is_palindrome2("race a car")
+
+assert not is_palindrome3('asdf')
+assert not is_palindrome3('abaa')
+assert not is_palindrome3('abbaa')
+assert not is_palindrome3('ab')
+assert is_palindrome3('aa')
+assert is_palindrome3('a')
+assert is_palindrome3('')
+assert is_palindrome3('aca')
+assert is_palindrome3('aabbaa')
+assert is_palindrome3('aabcbaa')
+assert is_palindrome3("A man, a plan, a canal: Panama")
+assert is_palindrome3("")
+assert not is_palindrome3("race a car")
