@@ -7,8 +7,6 @@
 # Input: 1 -> 2 -> 4, 1 -> 3 -> 4
 # Output: 1 -> 1 -> 2 -> 3 -> 4 -> 4
 
-# Definition for singly-linked list.
-
 
 class ListNode:
     def __init__(self, x):
@@ -18,20 +16,57 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        l3 = ListNode("stub")
-        head = l3  # return head.next
+        current = ListNode("dummy")
+        final = current  # return final.next
 
         while l1 and l2:
             if l1.val > l2.val:
-                l3.next = l2
+                current.next = l2
                 l2 = l2.next
             else:
-                l3.next = l1
+                current.next = l1
                 l1 = l1.next
-            l3 = l3.next
+            current = current.next
         if l1:
-            l3.next = l1
+            current.next = l1
         if l2:
-            l3.next = l2
+            current.next = l2
 
-        return head.next
+        return final.next
+
+
+# debug helpers
+
+def build_list(values):
+    if not values:
+        return None
+
+    head = ListNode(values[0])
+    current = head
+
+    for i in range(1, len(values)):
+        current.next = ListNode(values[i])
+        current = current.next
+
+    return head
+
+
+def read_list(head):
+    if not head:
+        return []
+
+    values = [head.val]
+    current = head
+
+    while current.next:
+        current = current.next
+        values.append(current.val)
+
+    return values
+
+
+if __name__ == '__main__':
+    s = Solution()
+    l1 = build_list([1, 2, 4])
+    l2 = build_list([1, 3, 4])
+    assert read_list(s.mergeTwoLists(l1, l2)) == [1, 1, 2, 3, 4, 4]
