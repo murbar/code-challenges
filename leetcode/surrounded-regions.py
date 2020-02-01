@@ -17,10 +17,7 @@ from typing import List
 
 
 def is_in_bounds(board, row, col):
-    if row >= 0 and row < len(board) and col >= 0 and col < len(board[0]):
-        return True
-
-    return False
+    return all((row >= 0, row < len(board), col >= 0, col < len(board[0])))
 
 
 def iterate_adjacent_cells(board, row, col):
