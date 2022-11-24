@@ -46,6 +46,7 @@ class Solution:
         for row, col in self.iterate_matrix(grid):
             islands += self.count_regions(grid, row, col, LAND, visited)
 
+
         return islands
 
 
