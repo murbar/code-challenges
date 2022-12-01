@@ -9,8 +9,9 @@
 # const solutionB = sum(totals.slice(0, 3));
 # console.log({ solutionA, solutionB });
 
-file = open("input.txt")
-cals = file.read().split("\n\n")
+def read_text_file(path):
+    with open(path) as file:
+        return file.read()
 
 
 def sum_lines(string):
@@ -18,6 +19,7 @@ def sum_lines(string):
     return [int(n) for n in nums]
 
 
+cals = read_text_file('input.txt').split("\n\n")
 snacks = list(map(sum_lines, cals))
 total_calories = sorted(list(map(sum, snacks)), reverse=True)
 solutionA = total_calories[0]
