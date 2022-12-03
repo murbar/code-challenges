@@ -21,7 +21,7 @@ class Solution:
         current = head
         following = head
 
-        while current != None:
+        while current is not None:
             # keep reference to next node
             following = following.next
             # point current node to previous node
